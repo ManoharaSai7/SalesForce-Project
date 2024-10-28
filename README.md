@@ -1,164 +1,146 @@
----
+# Garage Management System - Salesforce CRM Solution for Automotive Service Centers
 
-# Garage Management System
+## Overview
 
-This Garage Management System, built on Salesforce, provides a streamlined solution for managing customer data, vehicle service records, billing, and feedback within a vehicle service garage. The project efficiently organizes customer information, schedules appointments, tracks service records, and handles billing, ensuring a seamless experience for garage managers, customers, and mechanics alike.
+The **Garage Management System (GMS)** is a comprehensive CRM solution built on Salesforce, designed specifically for automotive service centers. This system streamlines customer management, appointment scheduling, service tracking, and billing, creating a centralized platform that efficiently handles the customer lifecycle—from initial booking to post-service feedback.
 
----
+## Demonstration
 
-## Table of Contents
+[Garage Management System Demo Video](https://www.youtube.com/watch?v=_guS-8B18IU "Garage Management System Demonstration Video")
 
-1. [Project Overview](#project-overview)
-2. [Project Architecture](#project-architecture)
-3. [Objects & Key Features](#objects--key-features)
-   - [Customer Details](#customer-details)
-   - [Appointment](#appointment)
-   - [Service Records](#service-records)
-   - [Billing Details](#billing-details)
-   - [Feedback](#feedback)
-4. [Installation Guide](#installation-guide)
-5. [Usage](#usage)
-6. [Conclusion](#conclusion)
+Watch my Youtube video above for a complete demonstration of the Garage Management System's features and functionality.
 
----
+## Key Features
 
-## Project Overview
+* **Customer details:**
+    * Store and manage customer details including contact information, service history, and preferences.
+    * Access comprehensive service records for customer insights and tailored service.
 
-The Garage Management System (GMS) is designed to manage customer interactions, vehicle appointments, service records, billing, and feedback. Built using Salesforce, this system provides a centralized database to store and manage data, making garage operations more efficient. GMS covers the complete service process, from customer appointments to post-service feedback, improving service quality and operational efficiency.
+* **Appointment:**
+    * Schedule and manage appointments with mechanics.
+    * Automated reminders and notifications to reduce no-shows.
+    * Integrated calendar to optimize working time.
 
----
+* **Service Records:**
+    * Track detailed service information including service type, parts used, and associated costs.
+    * Link service records to specific customer appointments for easy tracking and reference.
 
-## Project Architecture
+* **Billing details:**
+    * Generate and manage billing details, linking them to service records.
+    * Track payment status and send timely payment reminders.
+    * Automated invoice generation and email notifications for a streamlined payment process.
 
-The GMS follows a multi-layered architecture on the Salesforce platform:
+* **Feedback:**
+    * Collect and manage customer feedback post-service.
+    * Track ratings and comments to enhance service quality.
+    * Analyze feedback trends for continuous improvement.
 
-1. **Data Layer**: Holds custom Salesforce objects—Customer Details, Appointment, Service Records, Billing Details, and Feedback—along with any standard objects for data integrity.
-2. **Logic Layer**: Comprises Apex classes, flows, and triggers that execute business logic, automating tasks like notifying customers, updating service status, and generating invoices.
-3. **UI Layer**: Built with Lightning Web Components (LWC), creating an intuitive interface for users to view and manage garage operations.
+## Technical Architecture
 
-The architecture is designed for scalability, allowing easy addition of new features without compromising performance.
+### Custom Objects
 
----
+* `Customer details`
+* `Appointment`
+* `Service Records`
+* `Billing details & Feedback`
 
-## Objects & Key Features
+### Object Relationships
 
-The following objects form the backbone of the Garage Management System, each contributing to specific functionalities required for garage operations.
+* `Appointment` → `Customer details` (Lookup)
+* `Service Records` → `Appointment` (Lookup)
+* `Billing details and feedback` → `Service Records` (Lookup)
 
-### Customer Details
+### Automation
 
-- **Description**: Stores all relevant customer information, facilitating easy retrieval and linking to service records.
-- **Fields**:
-  - Name
-  - Phone Number
-  - Email Address
-- **Key Features**:
-  - Manages customer records and stores essential contact details.
-  - Links each customer to their appointments and service history.
-  - Provides a single view of each customer, helping staff communicate effectively.
+* **Flows:**
+    * **Record-trigger Flow:** Manages customer verification, appointment, and reminder notifications.
+    * **Amount Update Flow:** Automatically generates a billing record upon service completion and sends payment reminders.
+    * **Email Alert Flow:** Sends a feedback request to customers post-service.
+
+* **Approval Processes:** Approvals for high-value repairs or additional services, with manager-based routing and email notifications for approvals and rejections.
+
+* **Apex Triggers:**
+    * **`AmountDistributionTrigger`:** Validates business hours for appointment and Automatically calculates service costs and updates billing status upon payment.
+
+### User Interface
+
+* **Lightning Components:**
+    * Custom Lightning App: "Garage Management System"
+    * Custom Home Page for easy navigation and quick access to customer and appointment details.
+    * Streamlined navigation with essential tabs and dashboards for Sales person and managers.
+
+## Setup Instructions
+
+1. **Object Creation:**
+    * Create `Customer details` and `Service Records` objects and data.
+    * Create `Appointment`, `Billing details`, and `Feedback` objects.
+    * Create relationship fields to link objects as needed.
+
+2. **User Configuration:**
+    * Set up profiles for Sales person and Managers.
+    * Configure user permissions and hierarchies for different user roles.
+
+3. **Flow Deployment:**
+    * Deploy the `Record-trigger Flow`.
+    * Deploy the `Amount update Flow`.
+    * Deploy the `Email alert Flow`.
+
+4. **Lightning App Setup:**
+    * Deploy the `Garage Management System` Lightning App.
+    * Configure home page layouts to suit user roles.
+    * Assign app permissions to profiles.
+
+## Custom Settings
+
+### Billing details and Feedback 
+
+* **Payment Status Values:** `Pending`, `Completed`
+* **Service Type Values:** `Maintainance Service`, `Repair`, `Replacement Parts`
+* **Rating for Service:** 1 (Poor) - 5 (Excellent)
+
+## Features in Detail
 
 ### Appointment
 
-- **Description**: Schedules and manages service appointments for each vehicle.
-- **Fields**:
-  - Appointment Date & Time
-  - Service Type (e.g., Repair, Maintenance)
-  - Assigned Mechanic
-  - Customer (linked to Customer Details)
-- **Key Features**:
-  - Enables efficient scheduling based on mechanic availability.
-  - Tracks appointment status in real time, from booking to completion.
-  - Sends automated reminders to customers and mechanics, reducing missed appointments.
+1. Customer requests an appointment, entering their preferred date and time.
+2. also provides the type of service required and provide details like vehicle number plate and other customer details.
+3. Appointment is confirmed, and a reminder email is sent to the customer.
 
-### Service Records
+### Service details  and Billing
 
-- **Description**: Logs detailed records of all services provided to a vehicle.
-- **Fields**:
-  - Service Description
-  - Parts Used (if applicable)
-  - Service Date
-  - Appointment (linked to Appointment object)
-- **Key Features**:
-  - Maintains a detailed service history for each vehicle, useful for tracking recurring issues or future references.
-  - Allows mechanics to document repairs, replacements, and diagnostic results.
-  - Provides a timeline of all services done for each vehicle, enhancing transparency with customers.
+1. Here all services provided, parts replaced and others will be recorded.
+2. Billing record is generated based on service type and labor, with costs calculated automatically.
+3. Payment reminders are sent if the billing status is pending.
 
-### Billing Details
+### Feedback Collection and Analysis
 
-- **Description**: Manages billing and invoicing information for each completed service.
-- **Fields**:
-  - Invoice Number
-  - Total Cost
-  - Payment Status (e.g., Paid, Unpaid)
-  - Service Record (linked to Service Records object)
-- **Key Features**:
-  - Generates and tracks invoices for each service, helping manage payments.
-  - Provides customers with a clear breakdown of costs and services.
-  - Automates reminders for unpaid invoices, ensuring efficient payment collection.
+1. Feedback request is sent to the customer post-service.
+2. Customer submits their feedback, which is recorded and linked to their profile.
+3. Negative feedback triggers a follow-up case for management review.
 
-### Feedback
+## System Requirements
 
-- **Description**: Captures feedback from customers post-service to assess satisfaction and areas for improvement.
-- **Fields**:
-  - Rating (1-5)
-  - Comments
-  - Service Record (linked to Service Records object)
-- **Key Features**:
-  - Enables customers to provide feedback after a service, allowing the garage to maintain quality.
-  - Aggregates feedback for performance evaluation and service improvement.
-  - Helps identify areas of improvement and ensures customer satisfaction through follow-up actions.
+* Salesforce Enterprise Edition or higher
+* System Administrator profile for initial setup
+* Service records and sales person licenses for end users
+
+## Author
+
+**Manohara Sai Subba Raju Golla**  
+Gayatri Vidya Parishad College of Engineering (A), Visakhapatnam  
+Roll Number: 21131A05D3<br>
+Email: 21131A05D3@gvpce.ac.in  
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## Acknowledgments
+
+* Gayatri Vidya Parishad College of Engineering
+* Salesforce Development Team
+* Project Mentors and Guides
 
 ---
 
-## Installation Guide
-
-### Pre-requisites
-
-- Salesforce Developer Edition or Sandbox account
-- Basic knowledge of Salesforce object configuration
-
-### Setup Instructions
-
-1. **Clone the repository** to your local system.
-2. **Log in** to your Salesforce Developer account.
-3. **Deploy metadata** using Salesforce CLI or Workbench.
-4. **Configure permissions**:
-   - Set up permissions for various roles (e.g., Admin, Mechanic, Customer Service) as needed.
-
-### Data Setup
-
-- **Import sample data** for each object to test functionality.
-- **Verify relationships** between objects to ensure data integrity and linkage across Customer Details, Appointment, Service Records, Billing Details, and Feedback.
-
----
-
-## Usage
-
-### Key Processes
-
-1. **Register a Customer**:
-   - Create a new record in the Customer Details object for each customer, storing their contact information for easy reference.
-
-2. **Schedule an Appointment**:
-   - Use the Appointment object to schedule a service for the customer’s vehicle.
-   - Select service type, date, and mechanic to assign, ensuring optimal resource allocation.
-
-3. **Document Service Records**:
-   - Upon completion of a service, update the Service Records object with details like service description, parts used, and diagnostic notes.
-
-4. **Generate Billing Details**:
-   - Create a Billing Details record linked to the Service Record, providing a transparent breakdown of charges and tracking payment status.
-
-5. **Capture Customer Feedback**:
-   - After service completion, request feedback from the customer and document it in the Feedback object for future analysis.
-
----
-
-## Conclusion
-
-The Garage Management System offers an efficient solution to manage customer interactions, service schedules, and billing. By using Salesforce’s robust CRM and automation tools, this project demonstrates the capability to modernize garage management, providing better visibility, accountability, and customer satisfaction. The modular structure allows for future scalability, making it adaptable for any garage service operation.
-
-For contributions, please fork the repository, make changes, and submit a pull request. For questions, reach out to the project maintainers!
-
---- 
-
-This README structure covers all core functionalities and objects of the Garage Management System and provides guidance for both installation and usage.
+*Note: This README is part of an SalesForce project demonstrating Salesforce CRM implementation for Garage Management System.*
