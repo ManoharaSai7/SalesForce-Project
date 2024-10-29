@@ -137,9 +137,9 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Gayatri Vidya Parishad College of Engineering
-* Salesforce Development Team
-* Project Mentors and Guides
+* Gayatri Vidya Parishad College of Engineering (A),
+* Salesforce Development Team,
+* Project Mentors and Guides.
 
 ---
 
