@@ -12,7 +12,7 @@ Watch my Youtube video above for a complete demonstration of the Garage Manageme
 
 ## Project Document
 
-[Garage Management System Document](https://1drv.ms/w/c/b6b090c6897cefaf/EbNRmc_XdHtAvekfsKF_SywBcj3UwQXWCCvRzt-k0lqM-w?e=7quib4 "Garage Management System Document")
+[Garage Management System Document](https://1drv.ms/w/c/b6b090c6897cefaf/EbNRmc_XdHtAvekfsKF_SywBcj3UwQXWCCvRzt-k0lqM-w?e=7quib4)
 
 ## Key Features
 
