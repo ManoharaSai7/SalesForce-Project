@@ -17,7 +17,7 @@ Watch my Youtube video above for a complete demonstration of the Garage Manageme
     * Access comprehensive service records for customer insights and tailored service.
 
 * **Appointment:**
-    * Schedule and manage appointments with mechanics.
+    * Schedule and manage appointments with garages.
     * Automated reminders and notifications to reduce no-shows.
     * Integrated calendar to optimize working time.
 
