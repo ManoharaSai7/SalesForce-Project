@@ -10,6 +10,10 @@ The **Garage Management System (GMS)** is a comprehensive CRM solution built on 
 
 Watch my Youtube video above for a complete demonstration of the Garage Management System's features and functionality.
 
+## Project Document
+
+[Garage Management System Document](https://1drv.ms/w/c/b6b090c6897cefaf/EbNRmc_XdHtAvekfsKF_SywBcj3UwQXWCCvRzt-k0lqM-w?e=7quib4 "Garage Management System Document")
+
 ## Key Features
 
 * **Customer details:**
